@@ -13,7 +13,7 @@ variables:
   azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
   
   # Web app name
-  webAppName: 'springbootapp'
+  webAppName: 'demospringwebapp'
 
   # Environment name
   environmentName: 'springbootapp'
