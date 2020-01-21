@@ -1,0 +1,35 @@
+pool:
+  name: Azure Pipelines
+  demands: maven
+
+#Your build pipeline references an undefined variable named ‘Parameters.mavenPOMFile’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+steps:
+- task: Maven@3
+  displayName: 'Maven pom.xml'
+  inputs:
+    mavenPomFile: '$(Parameters.mavenPOMFile)'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/*.jar'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
+
+- task: AzureWebApp@1
+  displayName: 'Azure Web App Deploy: demospringwebapp'
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
+    appType: webAppLinux
+    appName: demospringwebapp
+    deployToSlotOrASE: true
+    resourceGroupName: Demo
+    package: '$(build.artifactstagingdirectory)'
