@@ -9,8 +9,8 @@ trigger:
 variables:
 
   # Azure Resource Manager connection created during pipeline creation
-  # azureSubscription: '90a2f185-6456-4b47-a481-9c15ebc254a2'
-  azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
+  azureSubscription: '90a2f185-6456-4b47-a481-9c15ebc254a2'
+  # azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
   
   # Web app name
   webAppName: 'demospringwebapp'
@@ -61,7 +61,7 @@ stages:
         deploy:
           steps:
           - task: AzureWebApp@1
-            displayName: 'Azure Web App Deploy: springbootapp'
+            displayName: 'Azure Web App Deploy: demospringwebapp'
             inputs:
               azureSubscription: $(azureSubscription)
               appType: webAppLinux
