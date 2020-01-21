@@ -24,15 +24,15 @@ steps:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 
-- task: AzureWebApp@1
-  displayName: 'Azure Web App Deploy: demospringwebapp'
-  inputs:
-    azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
-    appType: webAppLinux
-    appName: demospringwebapp
-    deployToSlotOrASE: true
-    resourceGroupName: Demo
-    package: '$(build.artifactstagingdirectory)'
+# - task: AzureWebApp@1
+#   displayName: 'Azure Web App Deploy: demospringwebapp'
+#   inputs:
+#     azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
+#     appType: webAppLinux
+#     appName: demospringwebapp
+#     deployToSlotOrASE: true
+#     resourceGroupName: Demo
+#     package: '$(build.artifactstagingdirectory)'
     
 - task: AzureRmWebAppDeployment@1
   displayName: 'Azure App Service Deploy: demospringwebapp'
