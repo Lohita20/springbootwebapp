@@ -38,8 +38,9 @@ steps:
 - task: AzureRmWebAppDeployment@1
   displayName: 'Azure App Service Deploy: demospringwebapp'
   inputs:
+#     ConnectionType: AzureRM
     azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
-    ServiceConnection: Deployment
+#     ServiceConnection: Deployment
     appType: webAppLinux
     WebAppName: demospringwebapp
     deployToSlotOrASE: true
