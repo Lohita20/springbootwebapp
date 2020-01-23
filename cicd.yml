@@ -35,17 +35,17 @@ steps:
 #     resourceGroupName: Demo
 #     package: '$(build.artifactstagingdirectory)'
     
-- task: AzureRmWebAppDeployment@1
-  displayName: 'Azure App Service Deploy: springbootapp'
-  inputs:
-    ConnectionType: AzureRM
-    azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
-#     ConnectedServiceName: AppDeployment
-    appType: webAppLinux
-    WebAppName: springbootapps
-    deployToSlotOrASE: true
-    resourceGroupName: springbootapp
-    package: '$(build.artifactstagingdirectory)'
+# - task: AzureRmWebAppDeployment@1
+#   displayName: 'Azure App Service Deploy: springbootapp'
+#   inputs:
+#     ConnectionType: AzureRM
+#     azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
+# #     ConnectedServiceName: AppDeployment
+#     appType: webAppLinux
+#     WebAppName: springbootapps
+#     deployToSlotOrASE: true
+#     resourceGroupName: springbootapp
+#     package: '$(build.artifactstagingdirectory)'
     
 # - task: AzureRmWebAppDeployment@1
 #   displayName: 'Deploy Azure App Service'
@@ -56,4 +56,14 @@ steps:
 #       appType: '$(Parameters.WebAppKind)'
 #       WebAppName: 'nodewebapps'
 # #       WebAppName: '$(Parameters.WebAppName)'
+
+- task: AzureWebApp@1
+  displayName: 'Azure Web App Deploy: testspringbootapps'
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN ( 4170ffee-a940-479b-988c-50f869a6b94d )'
+    appType: webAppLinux
+    appName: springbootapps
+    deployToSlotOrASE: true
+    resourceGroupName: 'springboot'
+
     
