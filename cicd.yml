@@ -64,6 +64,6 @@ steps:
     appType: webAppLinux
     appName: springbootapps
     deployToSlotOrASE: true
-    resourceGroupName: 'springboot'
+    resourceGroupName: 'springbootapp'
     package: '$(build.artifactstagingdirectory)'
     
