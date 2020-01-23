@@ -38,11 +38,11 @@ steps:
 - task: AzureRmWebAppDeployment@1
   displayName: 'Azure App Service Deploy: demospringwebapp'
   inputs:
-#     ConnectionType: AzureRM
-    azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
+    ConnectionType: AzureRM
+    azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
 #     ServiceConnection: Deployment
     appType: webAppLinux
-    WebAppName: demospringwebapp
+    WebAppName: springbootapps
     deployToSlotOrASE: true
     resourceGroupName: Demo
     package: '$(build.artifactstagingdirectory)'
