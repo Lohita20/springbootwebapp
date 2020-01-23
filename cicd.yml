@@ -1,138 +1,75 @@
-# pool:
-# #   name: Azure Pipelines
-#   vmImage: windows-2019
-#   demands: maven
+pool:
+#   name: Azure Pipelines
+  vmImage: windows-2019
+  demands: maven
 
-# #Your build pipeline references an undefined variable named ‘Parameters.mavenPOMFile’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘Parameters.mavenPOMFile’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 
-# steps:
-# - task: Maven@3
-#   displayName: 'Maven pom.xml'
-#   inputs:
-#     mavenPomFile: 'pom.xml'
+steps:
+- task: Maven@3
+  displayName: 'Maven pom.xml'
+  inputs:
+    mavenPomFile: 'pom.xml'
 
-# - task: CopyFiles@2
-#   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-#   inputs:
-#     SourceFolder: '$(system.defaultworkingdirectory)'
-#     Contents: '**/*.jar'
-#     TargetFolder: '$(build.artifactstagingdirectory)'
-#   condition: succeededOrFailed()
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/*.jar'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
 
-# - task: PublishBuildArtifacts@1
-#   displayName: 'Publish Artifact: drop'
-#   inputs:
-#     PathtoPublish: '$(build.artifactstagingdirectory)'
-#   condition: succeededOrFailed()
-
-# # - task: AzureWebApp@1
-# #   displayName: 'Azure Web App Deploy: demospringwebapp'
-# #   inputs:
-# #     azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
-# #     appType: webAppLinux
-# #     appName: demospringwebapp
-# #     deployToSlotOrASE: true
-# #     resourceGroupName: Demo
-# #     package: '$(build.artifactstagingdirectory)'
-    
-# # - task: AzureRmWebAppDeployment@1
-# #   displayName: 'Azure App Service Deploy: springbootapp'
-# #   inputs:
-# #     ConnectionType: AzureRM
-# #     azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
-# # #     ConnectedServiceName: AppDeployment
-# #     appType: webAppLinux
-# #     WebAppName: springbootapps
-# #     deployToSlotOrASE: true
-# #     resourceGroupName: springbootapp
-# #     package: '$(build.artifactstagingdirectory)'
-    
-# # - task: AzureRmWebAppDeployment@1
-# #   displayName: 'Deploy Azure App Service'
-# #   inputs:
-# #         azureSubscription: 'spring-yml'
-# #     #   azureSubscription: '$(Parameters.ConnectedServiceName)'
-# # #       azureSubscription: '90a2f185-6456-4b47-a481-9c15ebc254a2'
-# #       appType: '$(Parameters.WebAppKind)'
-# #       WebAppName: 'nodewebapps'
-# # #       WebAppName: '$(Parameters.WebAppName)'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
 
 # - task: AzureWebApp@1
-#   displayName: 'Azure Web App Deploy: testspringbootapps'
+#   displayName: 'Azure Web App Deploy: demospringwebapp'
 #   inputs:
-#     azureSubscription: 'Visual Studio Enterprise – MPN ( 4170ffee-a940-479b-988c-50f869a6b94d )'
+#     azureSubscription: 'Visual Studio Enterprise – MPN (90a2f185-6456-4b47-a481-9c15ebc254a2)'
 #     appType: webAppLinux
-#     appName: springbootapps
+#     appName: demospringwebapp
 #     deployToSlotOrASE: true
-#     resourceGroupName: 'springbootapp'
+#     resourceGroupName: Demo
 #     package: '$(build.artifactstagingdirectory)'
     
-# Maven package Java project Web App to Linux on Azure
-# Build your Java project and deploy it to Azure as a Linux web app
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
-trigger:
-- master
-
-variables:
-
-  # Azure Resource Manager connection created during pipeline creation
-#   azureSubscription: '4170ffee-a940-479b-988c-50f869a6b94d'
-  azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
-  
-  # Web app name
-  webAppName: 'springbootdeploy'
-
-  # Environment name
-  environmentName: 'springbootdeploy'
-  
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
-
-stages:
-- stage: Build
-  displayName: Build stage
-  jobs:
-  - job: MavenPackageAndPublishArtifacts
-    displayName: Maven Package and Publish Artifacts
-    pool:
-      vmImage: $(vmImageName)
+# - task: AzureRmWebAppDeployment@1
+#   displayName: 'Azure App Service Deploy: springbootapp'
+#   inputs:
+#     ConnectionType: AzureRM
+#     azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
+# #     ConnectedServiceName: AppDeployment
+#     appType: webAppLinux
+#     WebAppName: springbootapps
+#     deployToSlotOrASE: true
+#     resourceGroupName: springbootapp
+#     package: '$(build.artifactstagingdirectory)'
     
-    steps:
-    - task: Maven@3
-      displayName: 'Maven Package'
-      inputs:
-        mavenPomFile: 'pom.xml'
+# - task: AzureRmWebAppDeployment@1
+#   displayName: 'Deploy Azure App Service'
+#   inputs:
+#         azureSubscription: 'spring-yml'
+#     #   azureSubscription: '$(Parameters.ConnectedServiceName)'
+# #       azureSubscription: '90a2f185-6456-4b47-a481-9c15ebc254a2'
+#       appType: '$(Parameters.WebAppKind)'
+#       WebAppName: 'nodewebapps'
+# #       WebAppName: '$(Parameters.WebAppName)'
 
-    - task: CopyFiles@2
-      displayName: 'Copy Files to artifact staging directory'
-      inputs:
-        SourceFolder: '$(System.DefaultWorkingDirectory)'
-        Contents: '**/target/*.?(war|jar)'
-        TargetFolder: $(Build.ArtifactStagingDirectory)
+- task: AzureWebApp@1
+  displayName: 'Azure Web App Deploy: springbootdeploy'
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN ( 4170ffee-a940-479b-988c-50f869a6b94d )'
+    appType: webAppLinux
+    appName: springbootdeploy
+    deployToSlotOrASE: true
+    resourceGroupName: 'demo_springboot'
+    package: '$(build.artifactstagingdirectory)'
+    
+Maven package Java project Web App to Linux on Azure
+Build your Java project and deploy it to Azure as a Linux web app
+Add steps that analyze code, save build artifacts, deploy, and more:
+https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
-    - upload: $(Build.ArtifactStagingDirectory)
-      artifact: drop
 
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-  jobs:
-  - deployment: DeployLinuxWebApp
-    displayName: Deploy Linux Web App
-    environment: $(environmentName)
-    pool: 
-      vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Azure Web App Deploy: springbootdeploy'
-            inputs:
-              azureSubscription: $(azureSubscription)
-              appType: webAppLinux
-              appName: $(webAppName)
-              package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
