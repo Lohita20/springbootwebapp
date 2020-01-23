@@ -40,10 +40,10 @@ steps:
   inputs:
     ConnectionType: AzureRM
     azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
-#     ServiceConnection: Deployment
+    ServiceConnection: AppDeployment
     appType: webAppLinux
     WebAppName: springbootapps
     deployToSlotOrASE: true
-    resourceGroupName: Demo
+    resourceGroupName: springbootapp
     package: '$(build.artifactstagingdirectory)'
     
