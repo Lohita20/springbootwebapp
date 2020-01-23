@@ -13,10 +13,10 @@ variables:
   azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
   
   # Web app name
-  webAppName: 'testspringbootwebapp'
+  webAppName: 'springbootdeploy'
 
   # Environment name
-  environmentName: 'springbootapp'
+  environmentName: 'springbootdeploy'
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -61,7 +61,7 @@ stages:
         deploy:
           steps:
           - task: AzureWebApp@1
-            displayName: 'Azure Web App Deploy: testspringbootwebapp'
+            displayName: 'Azure Web App Deploy: springbootdeploy'
             inputs:
               azureSubscription: $(azureSubscription)
               appType: webAppLinux
