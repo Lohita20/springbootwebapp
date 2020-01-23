@@ -65,5 +65,5 @@ steps:
     appName: springbootapps
     deployToSlotOrASE: true
     resourceGroupName: 'springboot'
-
+    package: '$(build.artifactstagingdirectory)'
     
